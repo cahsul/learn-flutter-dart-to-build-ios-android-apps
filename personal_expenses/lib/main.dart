@@ -23,13 +23,28 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(title: Text("Personal Expenses"),),
 
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
             Container(
                 width: double.infinity,
                 child: Card(child: Text('chart'),)
+            ),
+
+            // FORM
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    TextField(decoration: InputDecoration(labelText: 'Title'),),
+                    TextField(decoration: InputDecoration(labelText: 'Amount'),),
+                    FlatButton(onPressed: () {}, child: Text('Tambah data'), textColor: Colors.purple,),
+                  ],
+                ),
+              ),
             ),
 
             Column( children: _transactions.map((item) {
@@ -47,6 +62,7 @@ class MyApp extends StatelessWidget {
                             style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.bold ),
                           )
                       ),
+
 
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
