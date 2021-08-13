@@ -9,6 +9,12 @@ class TransactionNew extends StatelessWidget {
 
   TransactionNew(this.addNewData);
 
+  void submitProses() {
+    if(titleController.text.isEmpty || amountController.text.isEmpty ) { return; }
+    if(double.parse(amountController.text) < 0 ) { return; }
+    addNewData(titleController.text, double.parse(amountController.text)) ;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -17,12 +23,10 @@ class TransactionNew extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            TextField(decoration: InputDecoration(labelText: 'Title'), controller: titleController,),
-            TextField(decoration: InputDecoration(labelText: 'Amount'), controller: amountController,),
+            TextField(decoration: InputDecoration(labelText: 'Title'), controller: titleController, onSubmitted: (_) => submitProses(),),
+            TextField(decoration: InputDecoration(labelText: 'Amount'), controller: amountController, onSubmitted: (_) => submitProses(), keyboardType: TextInputType.numberWithOptions(decimal: true),),
             FlatButton(child: Text('Tambah data'), textColor: Colors.purple,
-              onPressed: () {
-                addNewData(titleController.text, double.parse(amountController.text)) ;
-              },
+              onPressed: submitProses,
             ),
           ],
         ),
