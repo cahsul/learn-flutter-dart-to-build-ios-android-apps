@@ -17,11 +17,24 @@ class _TransactionUserState extends State<TransactionUser> {
     TransactionVm(id: 'id2', title: 'sepatu', amount: 8.72, date: DateTime.now()),
   ];
 
+  void _addNewData(String title, double amount) {
+    var newData = new TransactionVm(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now()
+    );
+
+    setState(() {
+      _transactions.add(newData);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionNew(),
+        TransactionNew(_addNewData),
         TransactionList(_transactions),
       ],
     );
