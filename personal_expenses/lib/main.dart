@@ -16,19 +16,21 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text("Personal Expenses"),),
 
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
 
-            Container(
-                width: double.infinity,
-                child: Card(child: Text('chart'),)
-            ),
+              Container(
+                  width: double.infinity,
+                  child: Card(child: Text('chart'),)
+              ),
 
-            TransactionUser()
+              TransactionUser()
 
-          ],
+            ],
+          ),
         ),
       ),
     );
