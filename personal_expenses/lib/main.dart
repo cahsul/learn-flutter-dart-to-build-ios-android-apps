@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(title: Text("Personal Expenses"),),
 
         body: Column(
-
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
             Container(
@@ -22,10 +23,7 @@ class MyApp extends StatelessWidget {
                 child: Card(child: Text('chart'),)
             ),
 
-            Container(
-                width: double.infinity,
-                child: Card(child: Text('List of transactions'),)
-            ),
+            Card(child: Text('List of transactions'), color: Colors.amber,),
           ],
         ),
       ),
