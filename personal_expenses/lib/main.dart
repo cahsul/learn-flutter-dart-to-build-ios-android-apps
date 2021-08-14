@@ -1,38 +1,96 @@
 import 'package:flutter/material.dart';
-import './widgets/transaction_user.dart';
+import './widgets/transactionList.dart';
+import './widgets/transaction_new.dart';
+import 'models/transactionVm.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(FirstRun());
 }
 
-class MyApp extends StatelessWidget {
-  //const MyApp({Key? key}) : super(key: key);
+
+class FirstRun extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter App',
+      home: MyApp(),
+    );
+  }
+}
+
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  final List<TransactionVm> _transactions = [
+    TransactionVm(id: 'id1', title: 'baju', amount: 10.12, date: DateTime.now()),
+    TransactionVm(id: 'id2', title: 'sepatu', amount: 8.72, date: DateTime.now()),
+  ];
+
+  void _addNewData(String title, double amount) {
+    var newData = new TransactionVm(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now()
+    );
+
+    setState(() {
+      _transactions.add(newData);
+    });
+  }
+
+
+  void _showAddModal(BuildContext ctx) {
+    print(ctx.toString());
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return TransactionNew(_addNewData);
+      },
+    );
+
+  }
 
 
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text("Personal Expenses"),),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Personal Expenses"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add_a_photo),
+            onPressed: () => _showAddModal(context),
+          )
+        ],
+      ),
 
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
 
-              Container(
-                  width: double.infinity,
-                  child: Card(child: Text('chart'),)
-              ),
+            Container(
+                width: double.infinity,
+                child: Card(child: Text('chart'),)
+            ),
 
-              TransactionUser()
+            TransactionList(_transactions)
 
-            ],
-          ),
+          ],
         ),
       ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton( child: Icon(Icons.add) , onPressed: () => _showAddModal(context),),
     );
   }
 }
