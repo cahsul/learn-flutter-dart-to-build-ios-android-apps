@@ -27,38 +27,18 @@ class TransactionList extends StatelessWidget {
         itemCount: _transactions.length,
         itemBuilder: (ctx, i) {
           return Card(
-            child: Row(
-
-              children: [
-                // == price
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(10),
-                    // width: 80,
-                    decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor, width: 2) ),
-                    child: Text( '\$${_transactions[i].amount.toStringAsFixed(2)}',
-                      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold ),
-                    )
+            elevation: 5,
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: ListTile(
+              title: Text(_transactions[i].title, style: Theme.of(context).textTheme.headline6,),
+              subtitle: Text(DateFormat.yMMMd().format(_transactions[i].date), style: TextStyle(fontSize: 12, color: Colors.grey)),
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(child: Text('\$${_transactions[i].amount.toStringAsFixed(2)}')),
                 ),
-
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    //== title
-                    Text(_transactions[i].title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-
-                    // date
-                    Text( DateFormat.yMMMd().format(_transactions[i].date),
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    ),
-                  ],
-                )
-
-              ],
+              ),
             ),
           );
         },
