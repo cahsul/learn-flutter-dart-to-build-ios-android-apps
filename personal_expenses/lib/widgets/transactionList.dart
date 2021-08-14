@@ -23,9 +23,9 @@ class TransactionList extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     padding: EdgeInsets.all(10),
                     // width: 80,
-                    decoration: BoxDecoration(border: Border.all(color: Colors.purple, width: 2) ),
+                    decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor, width: 2) ),
                     child: Text( '\$${_transactions[i].amount.toStringAsFixed(2)}',
-                      style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.bold ),
+                      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold ),
                     )
                 ),
 

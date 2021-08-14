@@ -14,6 +14,10 @@ class FirstRun extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter App',
       home: MyApp(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber
+      ),
     );
   }
 }
