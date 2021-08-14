@@ -24,7 +24,8 @@ class FirstRun extends StatelessWidget {
             fontFamily: 'Quicksand',
             fontSize: 18,
             fontWeight: FontWeight.bold
-          )
+          ),
+          button: TextStyle( color: Colors.white)
         ),
 
         appBarTheme: AppBarTheme(
@@ -54,9 +55,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   final List<TransactionVm> _transactions = [
-    TransactionVm(id: 'id1', title: 'baju', amount: 30, date: DateTime.now()),
-    TransactionVm(id: 'id2', title: 'sepatu', amount: 20, date: DateTime.now().subtract(Duration(days: 1))),
-    TransactionVm(id: 'id2', title: 'sepatu', amount: 50, date: DateTime.now().subtract(Duration(days: 2)) ),
+    // TransactionVm(id: 'id1', title: 'baju', amount: 30, date: DateTime.now()),
+    // TransactionVm(id: 'id2', title: 'sepatu', amount: 20, date: DateTime.now().subtract(Duration(days: 1))),
+    // TransactionVm(id: 'id2', title: 'sepatu', amount: 50, date: DateTime.now().subtract(Duration(days: 2)) ),
   ];
 
   List<TransactionVm> get _last7DaysTransaction {
@@ -65,12 +66,12 @@ class _MyAppState extends State<MyApp> {
     }).toList();
   }
 
-  void _addNewData(String title, double amount) {
+  void _addNewData(String title, double amount, DateTime transactionDate) {
     var newData = new TransactionVm(
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now()
+        date: transactionDate
     );
 
     setState(() {
