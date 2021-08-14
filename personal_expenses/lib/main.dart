@@ -53,8 +53,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   final List<TransactionVm> _transactions = [
-    TransactionVm(id: 'id1', title: 'baju', amount: 10.12, date: DateTime.now()),
-    TransactionVm(id: 'id2', title: 'sepatu', amount: 8.72, date: DateTime.now()),
+    // TransactionVm(id: 'id1', title: 'baju', amount: 10.12, date: DateTime.now()),
+    // TransactionVm(id: 'id2', title: 'sepatu', amount: 8.72, date: DateTime.now()),
   ];
 
   void _addNewData(String title, double amount) {

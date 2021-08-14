@@ -11,7 +11,19 @@ class TransactionList extends StatelessWidget {
     return Container(
       color: Colors.red,
       height: 500,
-      child: ListView.builder(
+      child: _transactions.isEmpty ?
+        Column(
+          children: [
+            Text('data kosing nih..', style: Theme.of(context).textTheme.headline6,),
+            SizedBox(height: 20,),
+            Container(
+              height: 200,
+              child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,),
+            )
+          ],
+        )
+
+        : ListView.builder(
         itemCount: _transactions.length,
         itemBuilder: (ctx, i) {
           return Card(
