@@ -4,7 +4,8 @@ import '../models/transactionVm.dart';
 
 class TransactionList extends StatelessWidget {
   final List<TransactionVm> _transactions;
-  TransactionList(this._transactions);
+  final Function(String id) _deleteData;
+  TransactionList(this._transactions, this._deleteData);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,12 @@ class TransactionList extends StatelessWidget {
                   child: FittedBox(child: Text('\$${_transactions[i].amount.toStringAsFixed(2)}')),
                 ),
               ),
+
+              trailing: IconButton(
+                icon: Icon( Icons.delete),
+                onPressed: () => this._deleteData(_transactions[i].id),
+                color: Theme.of(context).errorColor, ),
+
             ),
           );
         },

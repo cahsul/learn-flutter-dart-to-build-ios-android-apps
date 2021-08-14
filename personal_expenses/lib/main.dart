@@ -79,6 +79,12 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _deleteData(String id) {
+    setState(() {
+      _transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
 
   void _showAddModal(BuildContext ctx) {
     print(ctx.toString());
@@ -118,7 +124,7 @@ class _MyAppState extends State<MyApp> {
                 child: Chart(_last7DaysTransaction),
             ),
 
-            TransactionList(_transactions)
+            TransactionList(_transactions, _deleteData)
 
           ],
         ),
