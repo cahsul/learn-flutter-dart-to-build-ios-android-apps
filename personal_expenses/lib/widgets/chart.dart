@@ -39,15 +39,18 @@ class Chart extends StatelessWidget {
 
     return Card(
       elevation: 6,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: _last7DaysData.map((item) {
-          return Flexible(
-            fit: FlexFit.tight,
-            child: ChartBar(item['day'].toString(), item['amount'] as double ,
-                _totalAmount7Days == 0.0 ? 0.0 :(item['amount'] as double) / _totalAmount7Days  ),
-          );
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: _last7DaysData.map((item) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(item['day'].toString(), item['amount'] as double ,
+                  _totalAmount7Days == 0.0 ? 0.0 :(item['amount'] as double) / _totalAmount7Days  ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

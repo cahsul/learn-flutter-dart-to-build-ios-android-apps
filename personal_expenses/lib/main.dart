@@ -112,6 +112,7 @@ class _MyAppState extends State<MyApp> {
           children: [
 
             Container(
+              margin: EdgeInsets.all(10),
                 width: double.infinity,
                 child: Chart(_last7DaysTransaction),
             ),
