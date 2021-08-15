@@ -101,16 +101,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
+    final _appBar = AppBar(
+      title: Text("Personal Expenses"),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add_a_photo),
+          onPressed: () => _showAddModal(context),
+        )
+      ],
+    );
+
+    final _heightArea = MediaQuery.of(context).size.height
+        - _appBar.preferredSize.height
+        - MediaQuery.of(context).padding.top ;
+
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Personal Expenses"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add_a_photo),
-            onPressed: () => _showAddModal(context),
-          )
-        ],
-      ),
+      appBar: _appBar,
 
       body: SingleChildScrollView(
         child: Column(
@@ -119,12 +126,16 @@ class _MyAppState extends State<MyApp> {
           children: [
 
             Container(
-              margin: EdgeInsets.all(10),
-                width: double.infinity,
-                child: Chart(_last7DaysTransaction),
-            ),
+              height: _heightArea * 0.4,
+              // margin: EdgeInsets.all(10),
+              width: double.infinity,
+              child: Chart(_last7DaysTransaction),),
 
-            TransactionList(_transactions, _deleteData)
+            Container(
+              height: _heightArea * 0.6,
+                child: TransactionList(_transactions, _deleteData))
+
+
 
           ],
         ),
