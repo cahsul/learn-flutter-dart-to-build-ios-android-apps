@@ -10,16 +10,19 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _transactions.isEmpty ?
-      Column(
+    LayoutBuilder(builder: (context, builder) {
+      return Column(
         children: [
           Text('data kosing nih..', style: Theme.of(context).textTheme.headline6,),
           SizedBox(height: 20,),
           Container(
-            height: 150,
+            height: builder.maxHeight * 0.7,
             child: Image.asset('assets/images/waiting.png', fit: BoxFit.cover,),
           )
         ],
-      )
+      );
+    })
+
 
       : ListView.builder(
       itemCount: _transactions.length,

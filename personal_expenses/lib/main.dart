@@ -101,6 +101,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
+    final _isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     final _appBar = AppBar(
       title: Text("Personal Expenses"),
       actions: [
@@ -115,30 +117,31 @@ class _MyAppState extends State<MyApp> {
         - _appBar.preferredSize.height
         - MediaQuery.of(context).padding.top ;
 
+    final chartWidget =
+    Container(
+      height: _heightArea * 0.4,
+      // margin: EdgeInsets.all(10),
+      width: double.infinity,
+      child: Chart(_last7DaysTransaction),);
+
+    final transactionListWidget =
+    Container(
+        height: _heightArea * 0.6,
+        child: TransactionList(_transactions, _deleteData));
 
     return Scaffold(
       appBar: _appBar,
 
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-
-            Container(
-              height: _heightArea * 0.4,
-              // margin: EdgeInsets.all(10),
-              width: double.infinity,
-              child: Chart(_last7DaysTransaction),),
-
-            Container(
-              height: _heightArea * 0.6,
-                child: TransactionList(_transactions, _deleteData))
-
-
-
-          ],
-        ),
+        child:
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              chartWidget,
+              transactionListWidget
+            ],
+          )
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

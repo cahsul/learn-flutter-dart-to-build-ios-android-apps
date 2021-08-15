@@ -43,26 +43,33 @@ class _TransactionNewState extends State<TransactionNew> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(decoration: InputDecoration(labelText: 'Title'), controller: titleController, onSubmitted: (_) => submitProses(),),
-            TextField(decoration: InputDecoration(labelText: 'Amount'), controller: amountController, onSubmitted: (_) => submitProses(), keyboardType: TextInputType.numberWithOptions(decimal: true),),
-            Row(children: [
-              Expanded(child: Text( _dateSelected == null ? 'pilih tanggal' : DateFormat.yMMMd().format(_dateSelected!) )),
-              FlatButton(
-                textColor: Theme.of(context).primaryColor,
-                child: Text('Choose Date'),
-                onPressed: _showDatePicker, )
-            ],),
-            RaisedButton(child: Text('Tambah data'),
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button!.color,
-              onPressed: submitProses),
-          ],
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+            top: 10,
+            left: 10,
+            right: 10,
+          ),
+          child: Column(
+            children: [
+              TextField(decoration: InputDecoration(labelText: 'Title'), controller: titleController, onSubmitted: (_) => submitProses(),),
+              TextField(decoration: InputDecoration(labelText: 'Amount'), controller: amountController, onSubmitted: (_) => submitProses(), keyboardType: TextInputType.numberWithOptions(decimal: true),),
+              Row(children: [
+                Expanded(child: Text( _dateSelected == null ? 'pilih tanggal' : DateFormat.yMMMd().format(_dateSelected!) )),
+                FlatButton(
+                  textColor: Theme.of(context).primaryColor,
+                  child: Text('Choose Date'),
+                  onPressed: _showDatePicker, )
+              ],),
+              RaisedButton(child: Text('Tambah data'),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button!.color,
+                onPressed: submitProses),
+            ],
+          ),
         ),
       ),
     );
