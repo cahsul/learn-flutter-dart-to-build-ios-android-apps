@@ -11,6 +11,7 @@ class CategoriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Meal Kategori'),),
       body: GridView(
+        padding: EdgeInsets.all(20),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 3/2,
