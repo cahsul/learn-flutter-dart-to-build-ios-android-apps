@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './pages/meal/meal_page.dart';
 import 'pages/category/categories_page.dart';
 import './app.dart';
 
@@ -13,12 +14,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Aplikasi Meals',
-      home: CategoriesPage(),
       theme: ThemeData(
         primarySwatch: Colors.pink,
         accentColor: Colors.amber,
         canvasColor: Color.fromRGBO(255, 254, 229, 1)
       ),
+      routes: {
+        '/' : (ctx) => CategoriesPage(),
+        MealPage.route : (ctx) => MealPage()
+      } ,
     );
   }
 }

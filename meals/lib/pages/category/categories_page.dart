@@ -6,6 +6,7 @@ import 'package:meals/pages/category/category_item.dart';
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,7 @@ class CategoriesPage extends StatelessWidget {
           ),
 
           children: DUMMY_CATEGORIES.map((item) {
-            return CategoryItem(item.title, item.color);
+            return CategoryItem(item.id ,item.title, item.color);
           }).toList(),
       ),
     );
