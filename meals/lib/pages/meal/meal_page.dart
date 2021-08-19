@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meals/pages/meal/meal_item.dart';
+import '../../data/MealDummy.dart';
 
 class MealPage extends StatelessWidget {
   static String route = 'meal-list';
@@ -11,9 +13,19 @@ class MealPage extends StatelessWidget {
     final title = routeArgs['title'].toString();
     final id = routeArgs['id'];
 
+    final filterMeals = DUMMY_MEALS.where((item) {
+      return item.categories.contains(id);
+    }).toList();
+
     return Scaffold(
       appBar: AppBar(title: Text(title),),
-      body: Center(child: Text('halaman meals..'),),
+      body: ListView.builder(
+        itemCount: filterMeals.length,
+        itemBuilder: (ctx, i) {
+          print(filterMeals.length);
+          return MealItem(filterMeals[i]);
+        },
+      ),
     );
   }
 }
