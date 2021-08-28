@@ -95,12 +95,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     setState(() { _isLoading = true; });
 
     if (_editedProduct.id != '') {
-      Provider.of<ProductsProvider>(context, listen: false).updateProduct(_editedProduct.id, _editedProduct);
+      await Provider.of<ProductsProvider>(context, listen: false).updateProduct(_editedProduct.id, _editedProduct);
     } else {
 
       try {
         await Provider.of<ProductsProvider>(context, listen: false).addProduct(_editedProduct);
-      } catch (error) {
+      }
+      catch (error) {
 
         await showDialog(
           context: context,
