@@ -149,7 +149,7 @@ class ProductsProvider with ChangeNotifier {
 
 
   Future<void> deleteProduct(String id) async {
-    final url = Uri.https('udemy-flutter-db630-default-rtdb.firebaseio.com', '/products/$id');
+    final url = Uri.https('udemy-flutter-db630-default-rtdb.firebaseio.com', '/products/$id.json');
 
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     ProductModel? existingProduct = _items[existingProductIndex];
