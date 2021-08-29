@@ -15,6 +15,7 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Your Cart'),
       ),
+
       body: Column(
         children: <Widget>[
           Card(
@@ -38,17 +39,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  FlatButton(
-                    child: Text('ORDER NOW'),
-                    onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                        cart.items.values.toList(),
-                        cart.totalAmount,
-                      );
-                      cart.clear();
-                    },
-                    textColor: Theme.of(context).primaryColor,
-                  )
+                  BuildFlatButton(cart: cart)
                 ],
               ),
             ),
@@ -68,6 +59,33 @@ class CartScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class BuildFlatButton extends StatelessWidget {
+  const BuildFlatButton({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+
+  final Cart cart;
+
+  @override
+  Widget build(BuildContext context) {
+    var _isLoading = false;
+
+    return FlatButton(
+      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+      onPressed: (cart.totalAmount <= 0 || _isLoading) ? null :
+          () {
+        Provider.of<Orders>(context, listen: false).addOrder(
+          cart.items.values.toList(),
+          cart.totalAmount,
+        );
+        cart.clear();
+      },
+      textColor: Theme.of(context).primaryColor,
     );
   }
 }
