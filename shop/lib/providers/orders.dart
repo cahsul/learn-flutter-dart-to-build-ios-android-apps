@@ -28,16 +28,35 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  void addOrderz(List<CartItemProvider> cartProducts, double total) {
-    _orders.insert(
-      0,
-      OrderItemProvider(
-        id: DateTime.now().toString(),
-        amount: total,
-        dateTime: DateTime.now(),
-        products: cartProducts,
-      ),
-    );
+  Future<void> fetchAndSetOrders() async {
+    final url = Uri.https('udemy-flutter-db630-default-rtdb.firebaseio.com', '/orders.json');
+    final response = await http.get(url);
+    final List<OrderItemProvider> loadedOrders = [];
+
+    final extractedData = json.decode(response.body) as Map<String, dynamic>?;
+
+    if (extractedData == null) {  return; }
+
+    extractedData.forEach((orderId, orderData) {
+      loadedOrders.add(
+        OrderItemProvider(
+          id: orderId,
+          amount: orderData['amount'],
+          dateTime: DateTime.parse(orderData['dateTime']),
+          products: (orderData['products'] as List<dynamic>)
+              .map(
+                (item) => CartItemProvider(
+                id: item['id'],
+                price: item['price'],
+                quantity: item['quantity'],
+                title: item['title'],
+            ),
+          )
+              .toList(),
+        ),
+      );
+    });
+    _orders = loadedOrders.reversed.toList();
     notifyListeners();
   }
 
